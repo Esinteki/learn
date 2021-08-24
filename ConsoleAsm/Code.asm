@@ -2,29 +2,18 @@
 .MODEL FLAT, C
 .STACK
 .DATA
-;-----------Local data------------------------------
-helloFormat BYTE "Hello, %s!", 10, 13, 0
+
+;EXTRN MsgBox : proc
+
 .CODE
-;-----------External usage--------------------------
-EXTRN  printf : proc;// we'll use printf
-EXTRN  readName : proc;//and void* readName()
-EXTRN  MsgBox : proc
-;-----------Function definitions--------------------
-sayHello PROC
+;MainAsm PROC
 
-call readName; eax = readName()
-lea ebx, helloFormat; ebx = &helloFormat
+;call MsgBox
 
-;printf(ebx,eax)
-push eax
-call MsgBox
-push ebx
-call printf
+;retn
 
-add esp, 8;pop x2
+;MainAsm ENDP
 
-retn
 
-sayHello ENDP
 
 END

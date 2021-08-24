@@ -1,4 +1,4 @@
-Microsoft (R) Macro Assembler Version 14.29.30040.0	    08/18/21 20:56:46
+Microsoft (R) Macro Assembler Version 14.29.30040.0	    08/25/21 00:27:08
 Code.asm						     Page 1 - 1
 
 
@@ -6,35 +6,22 @@ Code.asm						     Page 1 - 1
 				.MODEL FLAT, C
 				.STACK
  00000000			.DATA
-				;-----------Local data------------------------------
- 00000000 48 65 6C 6C 6F	helloFormat BYTE "Hello, %s!", 10, 13, 0
-	   2C 20 25 73 21
-	   0A 0D 00
+
+				;EXTRN MsgBox : proc
+
  00000000			.CODE
-				;-----------External usage--------------------------
-				EXTRN  printf : proc;// we'll use printf
-				EXTRN  readName : proc;//and void* readName()
-				EXTRN  MsgBox : proc
-				;-----------Function definitions--------------------
- 00000000			sayHello PROC
+				;MainAsm PROC
 
- 00000000  E8 00000000 E	call readName; eax = readName()
- 00000005  8D 1D 00000000 R	lea ebx, helloFormat; ebx = &helloFormat
+				;call MsgBox
 
-				;printf(ebx,eax)
- 0000000B  50			push eax
- 0000000C  E8 00000000 E	call MsgBox
- 00000011  53			push ebx
- 00000012  E8 00000000 E	call printf
+				;retn
 
- 00000017  83 C4 08		add esp, 8;pop x2
+				;MainAsm ENDP
 
- 0000001A  C3			retn
 
- 0000001B			sayHello ENDP
 
 				END
-Microsoft (R) Macro Assembler Version 14.29.30040.0	    08/18/21 20:56:46
+Microsoft (R) Macro Assembler Version 14.29.30040.0	    08/25/21 00:27:08
 Code.asm						     Symbols 2 - 1
 
 
@@ -46,15 +33,8 @@ Segments and Groups:
 
 FLAT . . . . . . . . . . . . . .	GROUP
 STACK  . . . . . . . . . . . . .	32 Bit	 00000400 Para	  Stack	  'STACK'	 
-_DATA  . . . . . . . . . . . . .	32 Bit	 0000000D Para	  Public  'DATA'	
-_TEXT  . . . . . . . . . . . . .	32 Bit	 0000001B Para	  Public  'CODE'	
-
-
-Procedures, parameters, and locals:
-
-                N a m e                 Type     Value    Attr
-
-sayHello . . . . . . . . . . . .	P Near	 00000000 _TEXT	Length= 0000001B Public C
+_DATA  . . . . . . . . . . . . .	32 Bit	 00000000 Para	  Public  'DATA'	
+_TEXT  . . . . . . . . . . . . .	32 Bit	 00000000 Para	  Public  'CODE'	
 
 
 Symbols:
@@ -70,10 +50,6 @@ Symbols:
 @fardata?  . . . . . . . . . . .	Text   	 FLAT
 @fardata . . . . . . . . . . . .	Text   	 FLAT
 @stack . . . . . . . . . . . . .	Text   	 FLAT
-MsgBox . . . . . . . . . . . . .	L Near	 00000000 FLAT	External C
-helloFormat  . . . . . . . . . .	Byte	 00000000 _DATA	
-printf . . . . . . . . . . . . .	L Near	 00000000 FLAT	External C
-readName . . . . . . . . . . . .	L Near	 00000000 FLAT	External C
 
 	   0 Warnings
 	   0 Errors
