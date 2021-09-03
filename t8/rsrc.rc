@@ -1,0 +1,16 @@
+#define IDM_TEST 1
+#define IDM_FIRST 2
+#define IDM_SECOND 3
+#define IDM_EXIT 4
+
+menu MENU
+{
+  POPUP "&Menu"
+        {
+         MENUITEM "&First",IDM_FIRST
+         MENUITEM "&Second", IDM_SECOND
+         MENUITEM SEPARATOR
+         MENUITEM "&Exit",IDM_EXIT
+        }
+  MENUITEM "&Test", IDM_TEST
+}
