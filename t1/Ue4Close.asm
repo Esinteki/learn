@@ -11,7 +11,7 @@ includelib C:\masm32\lib\user32.lib
 
 .code
 start:
-	
+
 	push 0
 	push offset WndClass
 	call FindWindowA@8
@@ -31,6 +31,9 @@ start:
 	push 2
 	push eax
 	call SendMessageA@16
+	
+	cmp eax, 0
+	jz start
 	
 	ret
 	
